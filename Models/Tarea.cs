@@ -11,9 +11,13 @@ namespace ToDoList.Models
         public int Id { get; set; }
         [NotNull]
         public string Nombre { get; set; }
-        [NotNull]
+      
         public string Descripcion { get; set; }
+
+        [NotNull]
         public string Estado { get; set; } // "Por hacer", "En progreso", "Finalizada" 
+
+        [NotNull]
         public string Prioridad { get; set; }
 
 
