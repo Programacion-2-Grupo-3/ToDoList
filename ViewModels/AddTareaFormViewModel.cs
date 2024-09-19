@@ -94,15 +94,20 @@ namespace ToDoList.ViewModels
                 };
 
 
-                if (Id == 0)
+               if (Validar(Tarea))
                 {
-                    TareaServices.Insert(Tarea);
-                }
-                else 
-                {
-                    TareaServices.Update(Tarea);
-                }
-                await App.Current!.MainPage!.Navigation.PopAsync();
+                    if (Id == 0)
+                    {
+                        TareaServices.Insert(Tarea);
+                    }
+                    else
+                    {
+                        TareaServices.Update(Tarea);
+                    }
+
+                    await App.Current!.MainPage!.Navigation.PopAsync();
+
+            }
 
             }
             catch (Exception ex) 
@@ -110,5 +115,34 @@ namespace ToDoList.ViewModels
                 Alerta("ERROR", ex.Message);
             }
         }
+
+         private bool Validar(Tarea Tarea)
+         {
+             if (Tarea.Nombre == null || Tarea.Nombre == "")
+             {
+                 Alerta("ADVERTENCIA", "Ingrese el nombre de la tarea");
+                 return false;
+        
+             }
+             else if (Tarea.Estado == null || Tarea.Estado == "")
+             {
+                 Alerta("ADVERTENCIA", "Ingrese el estado de la tarea");
+                 return false;
+        
+             }
+             else if (Tarea.Prioridad == null || Tarea.Prioridad == "")
+             {
+                 Alerta("ADVERTENCIA", "Ingrese la prioridad de la tarea");
+                 return false;
+        
+             }
+             else
+             {
+                 return true;
+             }
+         }
+
+
+        
     }
 }
